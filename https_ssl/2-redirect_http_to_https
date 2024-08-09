@@ -33,19 +33,19 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  nicole-frontend-http
+frontend  elvis-frontend-http
         bind *:80
         mode http
 	http-request redirect scheme https code 301 unless { ssl_fc }
 	http-request set-header X-Forwarded-Proto http
-        default_backend nicole-backend
+        default_backend elvis-backend
 
-frontend nicole-frontend-https
-	bind *:443 ssl crt /etc/haproxy/certs/www.angenicole.tech.pem
+frontend elvis-frontend-https
+	bind *:443 ssl crt /etc/haproxy/certs/www.elviskayonga.tech.pem
 	http-request set-header X-Forwarded-Proto https
-	default_backend nicole-backend
+	default_backend elvis-backend
 
-backend nicole-backend
+backend elvis-backend
         balance roundrobin
         server 6212-web-01 3.81.230.97:80 check
         server 6212-web-02 18.234.88.63:80 check
